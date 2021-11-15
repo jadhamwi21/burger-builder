@@ -8,6 +8,9 @@ export const authorization = (
 	next: NextFunction
 ) => {
 	const JwtToken = req.cookies.jwt as any;
+	if (!JwtToken) {
+		return res.status(500).send({ message: "JWT MISSING" });
+	}
 	const { role, id, isVerified }: any = jwt.verify(JwtToken, SECRET_KEY);
 	if (id) {
 		req.User = {

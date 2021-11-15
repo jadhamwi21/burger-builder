@@ -16,12 +16,13 @@ class App {
 	public constructor() {
 		this.app = express();
 		this.port = process.env.PORT || 8080;
+
 		this.app.use(cookieParser());
 		this.app.use(express.urlencoded());
 		this.app.use(express.json());
 		this.app.use(
 			cors({
-				origin: ["https://burger-builder10.netlify.app"],
+				origin: "https://burger-builder1.vercel.app",
 				credentials: true,
 			})
 		);

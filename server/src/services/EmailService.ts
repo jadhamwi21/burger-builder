@@ -3,7 +3,7 @@ import nodeoutlook from "nodejs-nodemailer-outlook";
 
 export class EmailService {
 	private UserEmail: string = "jad.hamwi8@hotmail.com";
-	private Password: string = "house3125474@";
+	private Password: string = "jad3125474";
 	private Receiver: string = "";
 	private Subject: string = "";
 	private HTML: string = "";

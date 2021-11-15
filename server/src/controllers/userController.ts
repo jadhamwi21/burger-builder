@@ -23,7 +23,7 @@ export const signup_user = async (req: Request, res: Response) => {
 		password: password,
 		email: email,
 		gender: gender,
-		is_verified: false,
+		is_verified: true,
 		verificationLink: verificationLink,
 		role: "customer",
 	};
@@ -31,17 +31,17 @@ export const signup_user = async (req: Request, res: Response) => {
 		raw: true,
 	})
 		.then(() => {
-			new EmailService()
-				.setSubject("Email Verification")
-				.setReceiver(email)
-				.setHTML(
-					`Click On This Link To Verify Your Account : <a href='${verificationLink}'>Click Here</a>`
-				)
-				.Send();
+			// new EmailService()
+			// 	.setSubject("Email Verification")
+			// 	.setReceiver(email)
+			// 	.setHTML(
+			// 		`Click On This Link To Verify Your Account : <a href='${verificationLink}'>Click Here</a>`
+			// 	)
+			// 	.Send();
 			res
 				.status(201)
 				.json({
-					message: "User Successfully Created, You Need To Verify Your Email",
+					message: "User Successfully Created",
 				})
 				.end();
 		})
@@ -111,10 +111,12 @@ export const login_user = async (req: Request, res: Response) => {
 							secure: process.env.NODE_ENV !== "development",
 							httpOnly: true,
 							expires: cookieExpirationDate,
+							sameSite: "none",
 						})
 						.cookie("remember_me", rememberMe, {
 							expires: cookieExpirationDate,
 							httpOnly: false,
+							sameSite: "none",
 						})
 						.json({
 							isVerified: user.is_verified,
@@ -188,6 +190,7 @@ export const refresh_cookies = async (req: Request, res: Response) => {
 			secure: process.env.NODE_ENV !== "development",
 			httpOnly: true,
 			expires: cookieExpirationDate,
+			sameSite: "none",
 		})
 		.end();
 };

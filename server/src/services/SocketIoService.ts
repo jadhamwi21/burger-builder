@@ -9,7 +9,7 @@ export class SocketIoService {
 	public constructor(server: HTTPServer) {
 		this.io = new Server(server, {
 			cors: {
-				origin: "https://burger-builder10.netlify.app",
+				origin: "https://burger-builder1.vercel.app",
 			},
 		});
 		this.io.on("connection", (socket) => {
